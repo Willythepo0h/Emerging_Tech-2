@@ -40,3 +40,6 @@ else:
     class_names=['Shine','Rain',]
     string="OUTPUT : "+class_names[np.argmax(prediction)]
     st.success(string)
+    
+st.info("""Github Repository Link: https://github.com/Willythepo0h/Emerging_Tech-2""")
+st.info("""Google Colab Link: https://colab.research.google.com/drive/1z8Q1byGelG2QqQRY66CjqP1ky4lM3IL_?usp=sharing""")
