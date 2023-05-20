@@ -11,7 +11,7 @@ st.write("""
 # Weather Classification Model"""
         )
 
-image = Image.open('weathering_with_you.jpg')
+image = Image.open('Weather_girl.jpg')
 st.image(image, caption='Weather Classification Model - John Willard S. Sucgang')
 
 file=st.file_uploader("Choose a photo from computer",type=["jpg","png"])
