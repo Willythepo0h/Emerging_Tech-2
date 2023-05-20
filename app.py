@@ -16,7 +16,6 @@ st.image(image, caption='Weather Classification Model - John Willard S. Sucgang'
 
 with st.container():
   col2 = st.columns((2,50,2))
-  with col2:
     st.header("Model Outputs")
     st.info("""Rain and Shine""")
     
