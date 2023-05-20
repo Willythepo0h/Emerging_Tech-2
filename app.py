@@ -6,7 +6,9 @@ def load_model():
   model=tf.keras.models.load_model('model_cnn.hdf5')
   return model
 model=load_model()
-st.write("""# Weather Classification Model""")
+st.write("""
+# Weather Classification Model"""
+        )
 file=st.file_uploader("Choose a photo from computer",type=["jpg","png"])
 
 import cv2
