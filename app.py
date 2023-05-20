@@ -9,6 +9,8 @@ model=load_model()
 st.write("""
 # Weather Classification Model"""
         )
+
+image = Image.open('200x201.png')
 file=st.file_uploader("Choose a photo from computer",type=["jpg","png"])
 
 import cv2
