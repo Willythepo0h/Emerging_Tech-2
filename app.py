@@ -10,7 +10,7 @@ st.write("""
 # Weather Classification Model"""
         )
 
-image = Image.open('200x201.png')
+image = Image.open('weathering_with_you.jpg')
 file=st.file_uploader("Choose a photo from computer",type=["jpg","png"])
 
 import cv2
