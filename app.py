@@ -12,6 +12,8 @@ st.write("""
         )
 
 image = Image.open('weathering_with_you.jpg')
+st.image(image, caption='Weather Classification Model - John Willard S. Sucgang')
+
 file=st.file_uploader("Choose a photo from computer",type=["jpg","png"])
 
 import cv2
