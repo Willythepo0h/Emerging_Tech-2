@@ -18,7 +18,7 @@ jobs:
         git config user.name "Your Name"
         git config user.email "youremail@example.com"
 
-    - name: Merge Pull Requests
+    - name: Merge Pull Requests and Add Status
       run: |
         PR_COUNT=$(curl -s -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" "https://api.github.com/repos/${{ github.repository }}/pulls?state=open" | jq length)
         if [ $PR_COUNT -gt 0 ]; then
@@ -28,6 +28,12 @@ jobs:
             collaborator_name=$(curl -s -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" "https://api.github.com/repos/${{ github.repository }}/pulls/$i" | jq -r .user.login)
             git merge main --no-edit -m "Merge #${i} from ${collaborator_name}"
             git push origin pr/$i
+            # Use GitHub API to create a status check
+            GITHUB_SHA=$(git rev-parse HEAD)
+            status_context="Automerge Status"
+            status_description="Automerge successful"
+            status_state="success"
+            curl -X POST -H "Accept: application/vnd.github.v3+json" -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" "https://api.github.com/repos/${{ github.repository }}/statuses/${GITHUB_SHA}" -d "{\"state\":\"${status_state}\",\"target_url\":\"https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}\",\"description\":\"${status_description}\",\"context\":\"${status_context}\"}"
           done
         fi
       env:
