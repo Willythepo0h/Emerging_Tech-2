@@ -6,7 +6,7 @@ on:
       - main  # Change this to your main branch
 
 jobs:
-  build:
+  deploy:
     runs-on: ubuntu-latest
 
     steps:
@@ -21,5 +21,5 @@ jobs:
     - name: Install dependencies
       run: pip install -r requirements.txt  # Use your requirements file
 
-    - name: Run tests
-      run: python app.py  # Replace with the command to run your application
+    - name: Deploy Streamlit app
+      run: streamlit run app.py  # Replace 'app.py' with the name of your Streamlit app script
