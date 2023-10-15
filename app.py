@@ -12,6 +12,10 @@ model=load_model()
 st.write("""
 # Weather Classification Model"""
         )
+st.write("This web application can classify weather conditions in uploaded images. Please follow these steps:")
+st.markdown("1. Upload an image using the 'Choose a photo from the computer' button.")
+st.markdown("2. Wait for the model to process the image.")
+st.markdown("3. View the prediction and confidence score.")
 
 image = Image.open('Weather_girl.jpg')
 st.image(image, caption='Weather Classification Model - John Willard S. Sucgang')
@@ -40,6 +44,7 @@ else:
     class_names=['Shine','Rain',]
     string="OUTPUT : "+class_names[np.argmax(prediction)]
     st.success(string)
+    st.write(f"Confidence Score: {max_prob:.2%}")
     
 st.info("""Github Repository Link: https://github.com/Willythepo0h/Emerging_Tech-2""")
 st.info("""Google Colab Link: https://colab.research.google.com/drive/1z8Q1byGelG2QqQRY66CjqP1ky4lM3IL_?usp=sharing""")
