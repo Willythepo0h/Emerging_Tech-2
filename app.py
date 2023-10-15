@@ -42,8 +42,9 @@ else:
     st.image(image,use_column_width=True)
     prediction=import_and_predict(image,model)
     class_names=['Shine','Rain',]
-    string="OUTPUT : "+class_names[np.argmax(prediction)]
-    st.success(string)
+    max_prob = np.max(prediction)
+    prediction_label = class_names[np.argmax(prediction)]
+    st.success(f"Prediction: {prediction_label}")
     st.write(f"Confidence Score: {max_prob:.2%}")
     
 st.info("""Github Repository Link: https://github.com/Willythepo0h/Emerging_Tech-2""")
