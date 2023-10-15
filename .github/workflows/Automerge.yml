@@ -1,0 +1,34 @@
+name: Automerge Changes to app.py
+
+on:
+  push:
+    branches:
+      - main  # Change this to your main branch
+
+jobs:
+  automerge:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up Git
+      run: |
+        git config user.name "Your Name"
+        git config user.email "youremail@example.com"
+
+    - name: Merge Pull Requests
+      run: |
+        # Automatically merge any pull requests
+        PR_COUNT=$(curl -s -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" "https://api.github.com/repos/${{ github.repository }}/pulls?state=open" | jq length)
+        if [ $PR_COUNT -gt 0 ]; then
+          for ((i = 1; i <= $PR_COUNT; i++)); do
+            git fetch origin pull/$i/head:pr/$i
+            git checkout pr/$i
+            git merge main --no-edit
+            git push origin pr/$i
+          done
+        fi
+    env:
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
