@@ -1,50 +1,34 @@
-name: Auto-Merge on Collaborator Commit
+name: Automerge Changes to app.py
 
 on:
   push:
     branches:
-      - main  # Replace with your main branch name
+      - main
 
 jobs:
-  auto_merge:
+  automerge:
     runs-on: ubuntu-latest
 
     steps:
     - name: Checkout code
       uses: actions/checkout@v2
 
-    - name: Merge if collaborator commits
-      id: auto_merge
+    - name: Set up Git
       run: |
-        # Check if the commit was made by a collaborator
-        PR_NUM=$(curl -s -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" "https://api.github.com/repos/${{ github.repository }}/pulls?state=open" | jq -r '.[] | select(.head.ref == env.GITHUB_REF) | .number')
-        COLLABORATOR=$(curl -s -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" "https://api.github.com/repos/${{ github.repository }}/pulls/$PR_NUM" | jq -r '.user.login')
+        git config user.name "Your Name"
+        git config user.email "youremail@example.com"
 
-        if [[ "$COLLABORATOR" == "${{ github.actor }}" ]]; then
-          echo "The commit was made by a collaborator: $COLLABORATOR. Merging PR #$PR_NUM..."
-          curl -X PUT -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" "https://api.github.com/repos/${{ github.repository }}/pulls/$PR_NUM/merge"
-          echo ::set-output name=pr_number::$PR_NUM
-          echo ::set-output name=collaborator::$COLLABORATOR
-        else
-          echo "The commit was not made by a collaborator. No action required."
+    - name: Merge Pull Requests
+      run: |
+        PR_COUNT=$(curl -s -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" "https://api.github.com/repos/${{ github.repository }}/pulls?state=open" | jq length)
+        if [ $PR_COUNT -gt 0 ]; then
+          for ((i = 1; i <= $PR_COUNT; i++)); do
+            git fetch origin pull/$i/head:pr/$i
+            git checkout pr/$i
+            collaborator_name=$(curl -s -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" "https://api.github.com/repos/${{ github.repository }}/pulls/$i" | jq -r .user.login)
+            git merge main --no-edit -m "Merge #${i} from ${collaborator_name}"
+            git push origin pr/$i
+          done
         fi
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-    - name: Create Check Run
-      if: always()
-      uses: actions/github-script@0.10.0
-      with:
-        github-token: ${{ secrets.GITHUB_TOKEN }}
-        script: |
-          await github.checks.create({
-            owner: context.repo.owner,
-            repo: context.repo.repo,
-            name: "Merge Status Check",
-            head_sha: context.sha,
-            conclusion: "success",
-            status: "completed",
-            output: {
-              title: "Merged PR #" + "${{ steps.auto_merge.outputs.pr_number }}" + " by " + "${{ steps.auto_merge.outputs.collaborator }}",
-            }
-          })
