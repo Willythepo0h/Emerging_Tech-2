@@ -4,3 +4,4 @@ streamlit
 pandas
 Pillow
 opencv-python-headless
+pytest
