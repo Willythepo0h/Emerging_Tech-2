@@ -34,7 +34,8 @@ with st.container():
     
 file=st.file_uploader("Choose a photo from computer",type=["jpg","png"])
 
-clear_output = False
+if 'clear_output' not in st.session_state:
+    st.session_state.clear_output = False
 
 def import_and_predict(image_data,model):
     size=(224,224)
@@ -57,9 +58,10 @@ else:
     st.write(f"Confidence Score: {max_prob:.2%}")
 
     if st.button("Clear Prediction"):
-        clear_output = True
-    else:
-        clear_output = False
+    st.session_state.clear_output = True
+
+    if st.session_state.clear_output:
+    display_prediction_output("") 
     
 st.info("""Github Repository Link: https://github.com/Willythepo0h/Emerging_Tech-2""")
 st.info("""Google Colab Link: https://colab.research.google.com/drive/1z8Q1byGelG2QqQRY66CjqP1ky4lM3IL_?usp=sharing""")
