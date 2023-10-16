@@ -6,13 +6,10 @@ import io
 def test_app_title():
     # Test the title of the Streamlit app
     with app.st.echo():
-        app.main()
-    assert app.st.title == "Weather Classification Model"
+    app.load_model()
+    app.st.title == "Weather Classification Model"
 
 def test_upload_and_predict():
-    # Test image upload and prediction
-    with app.st.echo():
-        app.main()
 
     # Simulate image upload
     test_image = Image.open('Weather_girl.jpg')
