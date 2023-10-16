@@ -6,7 +6,7 @@ import io
 def test_app_title():
     # Test the title of the Streamlit app
     with app.st.echo():
-    app.load_model()
+    app.load_model('model_cnn.hdf5')
     app.st.title == "Weather Classification Model"
 
 def test_upload_and_predict():
@@ -32,5 +32,5 @@ def test_upload_and_predict():
 
 def test_load_model():
     # Test loading the model
-    model = app.load_model()
+    model = app.load_model('model_cnn.hdf5')
     assert model
