@@ -58,10 +58,10 @@ else:
     st.write(f"Confidence Score: {max_prob:.2%}")
 
     if st.button("Clear Prediction"):
-        st.session_state.clear_output = True
+      st.session_state.clear_output = True
 
     if st.session_state.clear_output:
-    display_prediction_output("") 
+      display_prediction_output("") 
     
 st.info("""Github Repository Link: https://github.com/Willythepo0h/Emerging_Tech-2""")
 st.info("""Google Colab Link: https://colab.research.google.com/drive/1z8Q1byGelG2QqQRY66CjqP1ky4lM3IL_?usp=sharing""")
