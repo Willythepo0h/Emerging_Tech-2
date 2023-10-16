@@ -36,6 +36,8 @@ file=st.file_uploader("Choose a photo from computer",type=["jpg","png"])
 
 if 'clear_output' not in st.session_state:
     st.session_state.clear_output = False
+  
+prediction_history = []
 
 def import_and_predict(image_data,model):
     size=(224,224)
@@ -62,6 +64,17 @@ else:
 
     if st.session_state.clear_output:
       display_prediction_output("") 
-    
+      
+    if st.button("Save Prediction"):
+        if prediction_label and max_prob:  # Check if prediction exists
+            add_to_prediction_history(file.name, prediction_label, max_prob)
+            st.success("Prediction saved to history!")
+          
+if prediction_history:
+    st.header("Prediction History")
+    prediction_df = pd.DataFrame(prediction_history)
+    st.dataframe(prediction_df)
+else:
+    st.info("No predictions saved yet.")
 st.info("""Github Repository Link: https://github.com/Willythepo0h/Emerging_Tech-2""")
 st.info("""Google Colab Link: https://colab.research.google.com/drive/1z8Q1byGelG2QqQRY66CjqP1ky4lM3IL_?usp=sharing""")
