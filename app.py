@@ -17,6 +17,13 @@ st.markdown("1. Upload an image using the 'Choose a photo from the computer' but
 st.markdown("2. Wait for the model to process the image.")
 st.markdown("3. View the prediction and confidence score.")
 
+def display_prediction_output(output_text, clear_output):
+    # This function displays the prediction output
+    if clear_output:
+        st.empty()
+    else:
+        st.write(output_text)
+
 image = Image.open('Weather_girl.jpg')
 st.image(image, caption='Weather Classification Model - John Willard S. Sucgang')
 
@@ -26,6 +33,8 @@ with st.container():
   st.info("""Rain and Shine""")
     
 file=st.file_uploader("Choose a photo from computer",type=["jpg","png"])
+
+clear_output = False
 
 def import_and_predict(image_data,model):
     size=(224,224)
@@ -46,6 +55,11 @@ else:
     prediction_label = class_names[np.argmax(prediction)]
     st.success(f"Prediction: {prediction_label}")
     st.write(f"Confidence Score: {max_prob:.2%}")
+
+    if st.button("Clear Prediction"):
+        clear_output = True
+    else:
+        clear_output = False
     
 st.info("""Github Repository Link: https://github.com/Willythepo0h/Emerging_Tech-2""")
 st.info("""Google Colab Link: https://colab.research.google.com/drive/1z8Q1byGelG2QqQRY66CjqP1ky4lM3IL_?usp=sharing""")
