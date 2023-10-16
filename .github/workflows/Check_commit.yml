@@ -1,4 +1,4 @@
-name: Syntax Check 
+name: Check Commit changes/updates
 
 on:
   push:
