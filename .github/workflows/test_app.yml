@@ -3,7 +3,7 @@ name: Streamlit App Test
 on:
   push:
     branches:
-      - main  # Change this to your main branch name
+      - main 
 
 jobs:
   test:
@@ -19,7 +19,7 @@ jobs:
         python-version: 3.8
 
     - name: Install dependencies
-      run: pip install -r requirements.txt  # Add your dependencies if needed
+      run: pip install -r requirements.txt 
 
     - name: Run test script
       run: python test_app.py
