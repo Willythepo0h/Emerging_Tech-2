@@ -10,8 +10,17 @@ def load_model():
 
 def test_title():
     expected_title = "Weather Classification Model"
-    current_title = st.title_container.formats[0].content
+
+    # Use st.title to display the title
+    current_title = st.title
+
     return current_title == expected_title
+
+if __name__ == '__main__':
+    if test_title():
+        print("Title is correct")
+    else:
+        print("Title has changed")
 
 def test_model_hash():
     # Implement a method to check the hash of the model file and compare it with the previous hash
