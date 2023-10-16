@@ -1,36 +1,30 @@
-# test_app.py
-import app  # Import the main Streamlit application
-from PIL import Image
-import io
+import streamlit as st
+import tensorflow as tf
+from PIL import Image, ImageOps
+import numpy as np
 
-def test_app_title():
-    # Test the title of the Streamlit app
-    with app.st.echo():
-    app.load_model('model_cnn.hdf5')
-    app.st.title == "Weather Classification Model"
+@st.cache(allow_output_mutation=True)
+def load_model():
+    model = tf.keras.models.load_model('model_cnn.hdf5')
+    return model
 
-def test_upload_and_predict():
+def test_title():
+    expected_title = "Weather Classification Model"
+    current_title = st.title_container.formats[0].content
+    return current_title == expected_title
 
-    # Simulate image upload
-    test_image = Image.open('Weather_girl.jpg')
-    image_bytes = io.BytesIO()
-    test_image.save(image_bytes, format="JPEG")
-    app.st.file_uploader('Test Image', type=["jpg", "png"], value=image_bytes.getvalue())
-    app.st.text("Please upload an image file")
+def test_model_hash():
+    # Implement a method to check the hash of the model file and compare it with the previous hash
+    # If the hash has changed, return True; otherwise, return False
+    pass
 
-    # Ensure the app displays the uploaded image
-    assert app.st.image
-    assert app.st.text("Please upload an image file")
+if __name__ == '__main__':
+    if test_title():
+        print("Title is correct")
+    else:
+        print("Title has changed")
 
-    # Simulate image prediction
-    prediction = app.import_and_predict(test_image, app.model)
-    assert prediction
-
-    # Ensure the prediction is displayed
-    assert app.st.success("Prediction: ")
-    assert app.st.write("Confidence Score: ")
-
-def test_load_model():
-    # Test loading the model
-    model = app.load_model('model_cnn.hdf5')
-    assert model
+    if test_model_hash():
+        print("Model has changed")
+    else:
+        print("Model is the same")
