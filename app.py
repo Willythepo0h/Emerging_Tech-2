@@ -53,6 +53,7 @@ def add_to_prediction_history(image_filename, prediction_label, confidence_score
         "Prediction": prediction_label,
         "Confidence Score": confidence_score
     })
+  
 if file is None:
     st.text("Please upload an image file")
 else:
@@ -82,5 +83,6 @@ if prediction_history:
     st.dataframe(prediction_df)
 else:
     st.info("No predictions saved yet.")
+  
 st.info("""Github Repository Link: https://github.com/Willythepo0h/Emerging_Tech-2""")
 st.info("""Google Colab Link: https://colab.research.google.com/drive/1z8Q1byGelG2QqQRY66CjqP1ky4lM3IL_?usp=sharing""")
