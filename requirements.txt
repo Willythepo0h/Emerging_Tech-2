@@ -5,3 +5,6 @@ pandas
 Pillow
 opencv-python-headless
 pytest
+seaborn
+matplotlib.pyplot
+sklearn.metrics
