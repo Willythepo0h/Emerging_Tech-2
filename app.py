@@ -9,7 +9,7 @@ import matplotlib.pyplot as plt
 from sklearn.metrics import confusion_matrix
 
 @st.cache(allow_output_mutation=True)
-""" Import the Model """
+""" Import_the_Model """
 def load_model():
     model = tf.keras.models.load_model('model_cnn.hdf5')
     return model
