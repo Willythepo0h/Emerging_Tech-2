@@ -39,7 +39,7 @@ else:
         prediction = import_and_predict(image, model)
         class_names = ['Shine', 'Rain']
         max_prob = np.max(prediction)
-        prediction_label = class_names[np.argmax(prediction]
+        prediction_label = class_names[np.argmax(prediction)]
         st.success(f"Prediction: {prediction_label}")
         st.write(f"Confidence Score: {max_prob:.2%}")
 
