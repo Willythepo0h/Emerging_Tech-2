@@ -66,36 +66,4 @@ else:
 st.info("""Github Repository Link: https://github.com/Willythepo0h/Emerging_Tech-2""")
 st.info("""Google Colab Link: https://colab.research.google.com/drive/1z8Q1byGelG2QqQRY66CjqP1ky4lM3IL_?usp=sharing""")
 
-comment_tab = st.container()
-with comment_tab:
-    st.header("User Comments and Feedback")
-    st.write("Please leave your comments and feedback about the Weather Classification Model.")
-# Feedback form
-    user_name = st.text_input("Your Name:")
-    user_email = st.text_input("Your Email:")
-    user_comment = st.text_area("Comments:")
-    
-    # Submit button
-    if st.button("Submit Feedback"):
-        # Store feedback data in a DataFrame or a database
-        feedback_data = {
-            "Name": user_name,
-            "Email": user_email,
-            "Comment": user_comment
-        }
-        
-        # For demonstration purposes, storing feedback in a list
-        feedback_list = []  # Initialize an empty list to store feedback data
-        feedback_list.append(feedback_data)  # Add the current feedback to the list
-        
-        # Display a success message to the user
-        st.success("Thank you for your feedback! We appreciate your input.")
-        
-    # Display feedback history if any feedback is submitted
-    if feedback_list:
-        st.header("Feedback History")
-        feedback_df = pd.DataFrame(feedback_list)  # Create a DataFrame from the feedback list
-        st.dataframe(feedback_df)  # Display the feedback data in a DataFrame format
-    else:
-        st.info("No feedback submitted yet.")
 
