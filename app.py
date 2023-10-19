@@ -63,8 +63,8 @@ else:
         st.write(f"Confidence Score: {max_prob:.2%}")
         
         # Create a confusion matrix
-        true_labels = [0]  # Replace with actual true labels
-        predicted_labels = [1]  # Replace with model predictions
+        true_labels = ['Rain', 'Shine']  # Replace with actual true labels
+        predicted_labels = ['Rain', 'Shine']  # Replace with model predictions
         cm = confusion_matrix(true_labels, predicted_labels)
         
         # Display the confusion matrix as a heatmap
@@ -72,6 +72,7 @@ else:
         plt.figure(figsize=(6, 4))
         sns.heatmap(cm, annot=True, fmt="d", cmap="Blues")
         st.pyplot()
+        st.set_option('deprecation.showPyplotGlobalUse', False)
 
 st.info("Github Repository Link: https://github.com/Willythepo0h/Emerging-Tech-2")
 st.info("Google Colab Link: https://colab.research.google.com/drive/1z8Q1byGelG2QqQRY66CjqP1ky4lM3IL_?usp=sharing")
