@@ -71,6 +71,7 @@ else:
         plt.figure(figsize=(6, 4))
         sns.heatmap(cm, annot=True, fmt="d", cmap="Blues")
         st.pyplot()
+        st.set_option('deprecation.showPyplotGlobalUse', False)
 
 st.info("Github Repository Link: https://github.com/Willythepo0h/Emerging-Tech-2")
 st.info("Google Colab Link: https://colab.research.google.com/drive/1z8Q1byGelG2QqQRY66CjqP1ky4lM3IL_?usp=sharing")
