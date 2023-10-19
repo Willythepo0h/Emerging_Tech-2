@@ -1,7 +1,7 @@
 import streamlit as st
 import tensorflow as tf
 from PIL import Image, ImageOps
-import numpy as np
+import pandas as pd
 
 @st.cache(allow_output_mutation=True)
 def load_model():
@@ -36,8 +36,6 @@ file=st.file_uploader("Choose a photo from computer",type=["jpg","png"])
 
 if 'clear_output' not in st.session_state:
     st.session_state.clear_output = False
-  
-prediction_history = []
 
 def import_and_predict(image_data,model):
     size=(224,224)
@@ -46,13 +44,6 @@ def import_and_predict(image_data,model):
     img_reshape=img[np.newaxis,...]
     prediction=model.predict(img_reshape)
     return prediction
-  
-def add_to_prediction_history(image_filename, prediction_label, confidence_score):
-    prediction_history.append({
-        "Image": image_filename,
-        "Prediction": prediction_label,
-        "Confidence Score": confidence_score
-    })
   
 if file is None:
     st.text("Please upload an image file")
@@ -72,17 +63,40 @@ else:
     if st.session_state.clear_output:
       display_prediction_output("") 
       
-    if st.button("Save Prediction"):
-        if prediction_label and max_prob:  # Check if prediction exists
-            add_to_prediction_history(file.name, prediction_label, max_prob)
-            st.success("Prediction saved to history!")
-          
-if prediction_history:
-    st.header("Prediction History")
-    prediction_df = pd.DataFrame(prediction_history)
-    st.dataframe(prediction_df)
-else:
-    st.info("No predictions saved yet.")
   
 st.info("""Github Repository Link: https://github.com/Willythepo0h/Emerging_Tech-2""")
 st.info("""Google Colab Link: https://colab.research.google.com/drive/1z8Q1byGelG2QqQRY66CjqP1ky4lM3IL_?usp=sharing""")
+
+comment_tab = st.container()
+with comment_tab:
+    st.header("User Comments and Feedback")
+    st.write("Please leave your comments and feedback about the Weather Classification Model.")
+# Feedback form
+    user_name = st.text_input("Your Name:")
+    user_email = st.text_input("Your Email:")
+    user_comment = st.text_area("Comments:")
+    
+    # Submit button
+    if st.button("Submit Feedback"):
+        # Store feedback data in a DataFrame or a database
+        feedback_data = {
+            "Name": user_name,
+            "Email": user_email,
+            "Comment": user_comment
+        }
+        
+        # For demonstration purposes, storing feedback in a list
+        feedback_list = []  # Initialize an empty list to store feedback data
+        feedback_list.append(feedback_data)  # Add the current feedback to the list
+        
+        # Display a success message to the user
+        st.success("Thank you for your feedback! We appreciate your input.")
+        
+    # Display feedback history if any feedback is submitted
+    if feedback_list:
+        st.header("Feedback History")
+        feedback_df = pd.DataFrame(feedback_list)  # Create a DataFrame from the feedback list
+        st.dataframe(feedback_df)  # Display the feedback data in a DataFrame format
+    else:
+        st.info("No feedback submitted yet.")
+
