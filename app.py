@@ -58,8 +58,8 @@ else:
         # Show the prediction and confidence score
         st.success(f"Prediction: {prediction_label}")
         st.write(f"Confidence Score: {max_prob:.2%}")
-        shine = [prediction_label]
-        rain = [prediction_label]
+        shine = [0] # true label
+        rain = [1] # predicted
         cm = confusion_matrix(shine, rain)
         st.write("Confusion Matrix:")
         plt.figure(figsize=(6, 4))
