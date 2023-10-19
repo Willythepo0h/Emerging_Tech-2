@@ -18,6 +18,12 @@ jobs:
         git config user.name "Your Name"
         git config user.email "youremail@example.com"
 
+    - name: Check Syntax
+      run: |
+        pip install pylint
+        pylint app.py
+      continue-on-error: true
+
     - name: Merge Pull Requests and Add Status
       run: |
         PR_COUNT=$(curl -s -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" "https://api.github.com/repos/${{ github.repository }}/pulls?state=open" | jq length)
