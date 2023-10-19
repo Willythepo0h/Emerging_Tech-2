@@ -6,7 +6,7 @@ import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plt
 from sklearn.metrics import confusion_matrix
-from sklearn.metrics import plot_confusion_matrix
+
 
 @st.cache(allow_output_mutation=True)
 def load_model():
