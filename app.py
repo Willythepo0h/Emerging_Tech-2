@@ -63,7 +63,7 @@ else:
 
         shine = [prediction_label]  
         rain = [prediction_label]  
-        cm = confusion_matrix(true_labels, predicted_labels)
+        cm = confusion_matrix(shine, rain)
         
         st.write("Confusion Matrix:")
         plt.figure(figsize=(6, 4))
