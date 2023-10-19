@@ -18,6 +18,10 @@ jobs:
         git config user.name "Your Name"
         git config user.email "youremail@example.com"
 
+    - name: Install project dependencies
+      run: |
+        pip install -r requirements.txt
+
     - name: Check Syntax
       run: |
         pip install pylint
