@@ -1,6 +1,7 @@
 import streamlit as st
 import tensorflow as tf
 from PIL import Image, ImageOps
+import numpy as np
 
 @st.cache(allow_output_mutation=True)
 def load_model():
@@ -15,13 +16,6 @@ st.write("This web application can classify weather conditions in uploaded image
 st.markdown("1. Upload an image using the 'Choose a photo from the computer' button.")
 st.markdown("2. Wait for the model to process the image.")
 st.markdown("3. View the prediction and confidence score.")
-
-def display_prediction_output(output_text, clear_output):
-    # This function displays the prediction output
-    if clear_output:
-        st.empty()
-    else:
-        st.write(output_text)
 
 image = Image.open('Weather_girl.jpg')
 st.image(image, caption='Weather Classification Model - John Willard S. Sucgang')
@@ -55,14 +49,7 @@ else:
     prediction_label = class_names[np.argmax(prediction)]
     st.success(f"Prediction: {prediction_label}")
     st.write(f"Confidence Score: {max_prob:.2%}")
-
-    if st.button("Clear Prediction"):
-      st.session_state.clear_output = True
-
-    if st.session_state.clear_output:
-      display_prediction_output("") 
       
-  
 st.info("""Github Repository Link: https://github.com/Willythepo0h/Emerging_Tech-2""")
 st.info("""Google Colab Link: https://colab.research.google.com/drive/1z8Q1byGelG2QqQRY66CjqP1ky4lM3IL_?usp=sharing""")
 
