@@ -1,7 +1,6 @@
 import streamlit as st
 import tensorflow as tf
 from PIL import Image, ImageOps
-import pandas as pd
 
 @st.cache(allow_output_mutation=True)
 def load_model():
