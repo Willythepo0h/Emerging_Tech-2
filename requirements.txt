@@ -7,4 +7,4 @@ opencv-python-headless
 pytest
 seaborn
 matplotlib
-sklearn
+scikit-learn
