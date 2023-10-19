@@ -40,7 +40,7 @@ def import_and_predict(image_data,model):
 if file is None:
     st.text("Please upload an image file (jpg or png)")
 else:
-      if file.type not in ['image/jpeg', 'image/png']:
+    if file.type not in ['image/jpeg', 'image/png']:
         st.error("Unsupported file type. Please upload a .jpg or .png file.")
     else:  
     image=Image.open(file)
