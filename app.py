@@ -67,11 +67,9 @@ else:
         st.pyplot()
         st.set_option('deprecation.showPyplotGlobalUse', False)
 
-st.info("Github Repository Link: https://github.com/Willythepo0h/Emerging-Tech-2")
-st.info("Google Colab Link: https://colab.research.google.com/drive/1z8Q1byGelG2QqQRY66CjqP1ky4lM3IL_?usp=sharing")
+st.info("Github Link: https://github.com/Willythepo0h/Emerging-Tech-2")
 
 comment_tab = st.container()
-
 with comment_tab:
     st.header("User Comments and Feedback")
     st.write("Please leave your comments and feedback about the Weather Classification Model.")
