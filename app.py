@@ -62,9 +62,9 @@ else:
         st.write(f"Confidence Score: {max_prob:.2%}")
         
         # Create a confusion matrix
-        true_labels = ["Rain", "Shine"]  # Replace with actual true labels
-        predicted_labels = ["Rain", "Shine"]  # Replace with model predictions
-        cm = confusion_matrix(true_labels, predicted_labels)
+        true_labels = [['Shine', 'Rain']  # Replace with actual true labels
+        predicted_labels = [['Shine', 'Rain']  # Replace with model predictions
+        cm = confusion_matrix(true_labels, predicted_labels, labels=class_names)
         
         # Display the confusion matrix as a heatmap
         st.write("Confusion Matrix:")
