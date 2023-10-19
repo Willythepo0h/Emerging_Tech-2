@@ -58,9 +58,9 @@ else:
         # Show the prediction and confidence score
         st.success(f"Prediction: {prediction_label}")
         st.write(f"Confidence Score: {max_prob:.2%}")
-        shine = [0] # true label
-        rain = [1] # predicted
-        cm = confusion_matrix(shine, rain)
+        true_labels = ['Rain'] # true label
+        predicted_labels = [prediction_label] # predicted
+        cm = confusion_matrix(true_labels, predicted_labels, labels=class_names)
         st.write("Confusion Matrix:")
         plt.figure(figsize=(6, 4))
         sns.heatmap(cm, annot=True, fmt="d", cmap="Blues", xticklabels=class_names, yticklabels=class_names)
