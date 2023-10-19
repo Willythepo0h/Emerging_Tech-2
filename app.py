@@ -38,8 +38,10 @@ def import_and_predict(image_data,model):
     prediction=model.predict(img_reshape)
     return prediction
 if file is None:
-    st.text("Please upload an image file")
+    st.text("Please upload an image file (jpg or png).")
 else:
+if file.type not in ['image/jpeg', 'image/png']:
+    st.error("Unsupported file type. Please upload a .jpg or .png file.")
     image=Image.open(file)
     st.image(image,use_column_width=True)
     prediction=import_and_predict(image,model)
