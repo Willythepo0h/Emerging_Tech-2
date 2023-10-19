@@ -69,7 +69,7 @@ else:
         # Display the confusion matrix as a heatmap
         st.write("Confusion Matrix:")
         plt.figure(figsize=(6, 4))
-        sns.heatmap(cm, annot=True, fmt="d", cmap="Blues")
+        sns.heatmap(cm, annot=True, fmt="d", cmap="Blues", xticklabels=class_names, yticklabels=class_names)
         st.pyplot()
         st.set_option('deprecation.showPyplotGlobalUse', False)
 
