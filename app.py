@@ -58,14 +58,26 @@ else:
         # Show the prediction and confidence score
         st.success(f"Prediction: {prediction_label}")
         st.write(f"Confidence Score: {max_prob:.2%}")
-        true_labels = ['Rain', 'Shine'] # true label
-        predicted_labels = [prediction_label] # predicted
-        cm = confusion_matrix(true_labels, predicted_labels, labels=class_names)
-        st.write("Confusion Matrix:")
-        plt.figure(figsize=(6, 4))
-        sns.heatmap(cm, annot=True, fmt="d", cmap="Blues", xticklabels=class_names, yticklabels=class_names)
-        st.pyplot()
-        st.set_option('deprecation.showPyplotGlobalUse', False)
+        if prediction_label == 'Shine':
+            true_labels = ['Shine']  # True label
+            predicted_labels = [prediction_label]  # Predicted label
+            title = "Confusion Matrix"
+        elif prediction_label == 'Rain':
+            true_labels = ['Rain']  # True label
+            predicted_labels = [prediction_label]  # Predicted label
+            title = "Confusion Matrix"
+        else:
+            true_labels = []  # Set appropriate default values for unexpected predictions
+            predicted_labels = []
+            title = "Confusion Matrix"
+        
+        if true_labels and predicted_labels:
+            cm = confusion_matrix(true_labels, predicted_labels, labels=class_names)
+            st.write(title)
+            plt.figure(figsize=(6, 4))
+            sns.heatmap(cm, annot=True, fmt="d", cmap="Blues", xticklabels=class_names, yticklabels=class_names)
+            st.pyplot()
+            st.set_option('deprecation.showPyplotGlobalUse', False)
 
 st.info("Github Link: https://github.com/Willythepo0h/Emerging-Tech-2")
 
