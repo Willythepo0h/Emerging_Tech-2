@@ -59,15 +59,15 @@ else:
         st.success(f"Prediction: {prediction_label}")
         st.write(f"Confidence Score: {max_prob:.2%}")
         if prediction_label == 'Shine':
-            true_labels = ['Shine']  # True label
-            predicted_labels = [prediction_label]  # Predicted label
+            true_labels = ['Shine']  
+            predicted_labels = [prediction_label]  
             title = "Confusion Matrix"
         elif prediction_label == 'Rain':
-            true_labels = ['Rain']  # True label
-            predicted_labels = [prediction_label]  # Predicted label
+            true_labels = ['Rain'] 
+            predicted_labels = [prediction_label]  
             title = "Confusion Matrix"
         else:
-            true_labels = []  # Set appropriate default values for unexpected predictions
+            true_labels = [] 
             predicted_labels = []
             title = "Confusion Matrix"
         
