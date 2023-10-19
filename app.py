@@ -62,7 +62,8 @@ with comment_tab:
     user_name = st.text_input("Your Name:")
     user_email = st.text_input("Your Email:")
     user_comment = st.text_area("Comments:")
-    
+  
+    feedback_list = []  # Initialize an empty list to store feedback data
     # Submit button
     if st.button("Submit Feedback"):
         # Store feedback data in a DataFrame or a database
@@ -73,7 +74,6 @@ with comment_tab:
         }
         
         # For demonstration purposes, storing feedback in a list
-        feedback_list = []  # Initialize an empty list to store feedback data
         feedback_list.append(feedback_data)  # Add the current feedback to the list
         
         # Display a success message to the user
