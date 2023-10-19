@@ -50,21 +50,17 @@ else:
     else:
         image = Image.open(file)
         st.image(image, use_column_width=True)
-        
         # Process the image and get predictions
         prediction = import_and_predict(image, model)
         class_names = ['Shine', 'Rain']
         max_prob = np.max(prediction)
         prediction_label = class_names[np.argmax(prediction)]
-        
         # Show the prediction and confidence score
         st.success(f"Prediction: {prediction_label}")
         st.write(f"Confidence Score: {max_prob:.2%}")
-
         shine = [prediction_label]  
         rain = [prediction_label]  
         cm = confusion_matrix(shine, rain)
-        
         st.write("Confusion Matrix:")
         plt.figure(figsize=(6, 4))
         sns.heatmap(cm, annot=True, fmt="d", cmap="Blues", xticklabels=class_names, yticklabels=class_names)
