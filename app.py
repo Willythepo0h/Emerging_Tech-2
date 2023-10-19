@@ -9,6 +9,7 @@ import matplotlib.pyplot as plt
 from sklearn.metrics import confusion_matrix
 
 @st.cache(allow_output_mutation=True)
+""" Import Model"""
 def load_model():
     model = tf.keras.models.load_model('model_cnn.hdf5')
     return model
@@ -34,7 +35,7 @@ file = st.file_uploader("Choose a photo from your computer", type=["jpg", "png"]
 
 if 'clear_output' not in st.session_state:
     st.session_state.clear_output = False
-
+""" Used to add Image for Prediction"""
 def import_and_predict(image_data, model):
     size = (224, 224)
     image = ImageOps.fit(image_data, size, Image.LANCZOS)
