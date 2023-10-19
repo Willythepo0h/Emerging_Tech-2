@@ -1,19 +1,8 @@
 import streamlit as st
-import smtplib
-from email.mime.text import MIMEText
-from email.mime.multipart import MIMEMultipart
 import tensorflow as tf
 from PIL import Image, ImageOps
 import numpy as np
 import pandas as pd
-
-# Email configuration
-SMTP_SERVER = "smtp.example.com"
-SMTP_PORT = 587
-SMTP_USERNAME = "your_username"
-SMTP_PASSWORD = "your_password"
-EMAIL_FROM = "your_email@example.com"
-EMAIL_TO = "recipient@example.com"
 
 @st.cache(allow_output_mutation=True)
 def load_model():
@@ -63,26 +52,6 @@ else:
         prediction_label = class_names[np.argmax(prediction)]
         st.success(f"Prediction: {prediction_label}")
         st.write(f"Confidence Score: {max_prob:.2%}")
-
-        # Send email notification
-        subject = "Weather Classification Result"
-        message = f"Image uploaded:\nPrediction: {prediction_label}\nConfidence Score: {max_prob:.2%}"
-
-        try:
-            msg = MIMEMultipart()
-            msg["From"] = EMAIL_FROM
-            msg["To"] = EMAIL_TO
-            msg["Subject"] = subject
-            msg.attach(MIMEText(message, "plain"))
-
-            server = smtplib.SMTP(SMTP_SERVER, SMTP_PORT)
-            server.starttls()
-            server.login(SMTP_USERNAME, SMTP_PASSWORD)
-            server.sendmail(EMAIL_FROM, EMAIL_TO, msg.as_string())
-            server.quit()
-            st.success("Email notification sent successfully.")
-        except Exception as e:
-            st.error(f"Error sending email notification: {str(e)}")
 
 st.info("Github Repository Link: https://github.com/Willythepo0h/Emerging_Tech-2")
 st.info("Google Colab Link: https://colab.research.google.com/drive/1z8Q1byGelG2QqQRY66CjqP1ky4lM3IL_?usp=sharing")
