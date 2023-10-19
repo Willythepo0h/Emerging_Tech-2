@@ -1,3 +1,4 @@
+""" Import Dependencies """
 import streamlit as st
 import tensorflow as tf
 from PIL import Image, ImageOps
@@ -73,7 +74,6 @@ comment_tab = st.container()
 with comment_tab:
     st.header("User Comments and Feedback")
     st.write("Please leave your comments and feedback about the Weather Classification Model.")
-    
     # Feedback form
     user_name = st.text_input("Your Name:")
     user_email = st.text_input("Your Email:")
