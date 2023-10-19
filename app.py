@@ -14,7 +14,7 @@ st.write("""
 # Weather Classification Model"""
         )
 st.write("This web application can classify weather conditions in uploaded images. Please follow these steps:")
-st.markdown("1. Upload an image using the 'Choose a photo from the computer'")
+st.markdown("1. Upload an image using the 'Browse Files' button.")
 st.markdown("2. Wait for the model to process the image.")
 st.markdown("3. View the prediction and confidence score.")
 image = Image.open('Weather_girl.jpg')
