@@ -3,6 +3,10 @@ import tensorflow as tf
 from PIL import Image, ImageOps
 import numpy as np
 import pandas as pd
+import seaborn as sns
+import matplotlib.pyplot as plt
+from sklearn.metrics import confusion_matrix
+from sklearn.metrics import plot_confusion_matrix
 
 @st.cache(allow_output_mutation=True)
 def load_model():
@@ -10,6 +14,7 @@ def load_model():
     return model
 
 model = load_model()
+
 st.write("""
 # Weather Classification Model
 """)
@@ -39,21 +44,36 @@ def import_and_predict(image_data, model):
     return prediction
 
 if file is None:
-    st.text("Please upload an image file (jpg or png).")
+    st.text("Please upload an image file")
 else:
     if file.type not in ['image/jpeg', 'image/png']:
         st.error("Unsupported file type. Please upload a .jpg or .png file.")
     else:
         image = Image.open(file)
         st.image(image, use_column_width=True)
+        
+        # Process the image and get predictions
         prediction = import_and_predict(image, model)
         class_names = ['Shine', 'Rain']
         max_prob = np.max(prediction)
-        prediction_label = class_names[np.argmax(prediction)]
+        prediction_label = class_names[np.argmax(prediction]
+        
+        # Show the prediction and confidence score
         st.success(f"Prediction: {prediction_label}")
         st.write(f"Confidence Score: {max_prob:.2%}")
+        
+        # Create a confusion matrix
+        true_labels = [0]  # Replace with actual true labels
+        predicted_labels = [1]  # Replace with model predictions
+        cm = confusion_matrix(true_labels, predicted_labels)
+        
+        # Display the confusion matrix as a heatmap
+        st.write("Confusion Matrix:")
+        plt.figure(figsize=(6, 4))
+        sns.heatmap(cm, annot=True, fmt="d", cmap="Blues")
+        st.pyplot()
 
-st.info("Github Repository Link: https://github.com/Willythepo0h/Emerging_Tech-2")
+st.info("Github Repository Link: https://github.com/Willythepo0h/Emerging-Tech-2")
 st.info("Google Colab Link: https://colab.research.google.com/drive/1z8Q1byGelG2QqQRY66CjqP1ky4lM3IL_?usp=sharing")
 
 comment_tab = st.container()
