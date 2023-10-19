@@ -17,7 +17,7 @@ model = load_model()
 st.write("""
 # Weather Classification Model
 """)
-st.write("This web application can classify weather conditions in uploaded images. Please follow these steps:")
+st.write("This web application classify weather conditions in uploaded images. Please follow the steps:")
 st.markdown("1. Upload an image using the 'Browse Files' button.")
 st.markdown("2. Wait for the model to process the image.")
 st.markdown("3. View the prediction and confidence score.")
@@ -58,8 +58,8 @@ else:
         # Show the prediction and confidence score
         st.success(f"Prediction: {prediction_label}")
         st.write(f"Confidence Score: {max_prob:.2%}")
-        shine = [prediction_label]  
-        rain = [prediction_label]  
+        shine = [prediction_label]
+        rain = [prediction_label]
         cm = confusion_matrix(shine, rain)
         st.write("Confusion Matrix:")
         plt.figure(figsize=(6, 4))
