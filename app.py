@@ -58,7 +58,7 @@ else:
         # Show the prediction and confidence score
         st.success(f"Prediction: {prediction_label}")
         st.write(f"Confidence Score: {max_prob:.2%}")
-        true_labels = ['Rain'] # true label
+        true_labels = ['Rain', 'Shine'] # true label
         predicted_labels = [prediction_label] # predicted
         cm = confusion_matrix(true_labels, predicted_labels, labels=class_names)
         st.write("Confusion Matrix:")
