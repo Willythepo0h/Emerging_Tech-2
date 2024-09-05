@@ -1,4 +1,4 @@
 # Emerging_Tech-2
 Emerging Technologies 2 Model Deployment..
 
-This is a testing Web Application for Weather Classification
+This is a testing Web Application for Weather Classification using a Deep Learning Model
